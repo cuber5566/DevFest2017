@@ -1,4 +1,4 @@
-package com.cuber.devfest.ui
+package com.cuber.devfest.ui.product.list
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

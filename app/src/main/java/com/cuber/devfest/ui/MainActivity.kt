@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.cuber.devfest.R
+import com.cuber.devfest.ui.product.detail.ProductDetailFragment
+import com.cuber.devfest.ui.product.list.ProductListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.cuber.devfest.ui
+package com.cuber.devfest.ui.product.list
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_product_list.*
  */
 class ProductListFragment : Fragment() {
 
-    var postAdapter:PostListAdapter? = null
+    var postAdapter: PostListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

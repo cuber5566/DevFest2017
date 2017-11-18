@@ -1,4 +1,4 @@
-package com.cuber.devfest.ui
+package com.cuber.devfest.ui.product.detail
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
