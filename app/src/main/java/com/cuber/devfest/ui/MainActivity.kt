@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(R.id.container, FirstFragment())
+                    .add(R.id.container, ProductListFragment())
                     .commit()
         }
 
@@ -27,18 +27,10 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
 
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SecondFragment())
+                    .replace(R.id.container, ProductDetailFragment())
                     .addToBackStack(null)
                     .commit()
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
