@@ -9,6 +9,7 @@ import com.cuber.devfest.util.PreferencesTool
 import com.cuber.devfest.util.ResourceTool
 import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 
 class ProductRepository(
         private var preferencesTool: PreferencesTool = PreferencesTool.getInstance(),
@@ -28,7 +29,7 @@ class ProductRepository(
     }
 
     override fun getProductListByCategory(categoryId: String): Single<List<Product>> {
-        TODO("Call API")
+        return Single.just(getFakeProductList()).delay(API_DELAY, TimeUnit.MILLISECONDS)
     }
 
     override fun getCartPostList(): List<Product> {
@@ -47,6 +48,7 @@ class ProductRepository(
     companion object {
 
         private var INSTANCE: ProductRepository? = null
+        private var API_DELAY = 3000L
 
         @JvmStatic
         fun getInstance(): ProductRepository {
@@ -58,5 +60,35 @@ class ProductRepository(
         fun destroyInstance() {
             INSTANCE = null
         }
+    }
+
+    private fun getFakeProductList(): List<Product> {
+        val productList = ArrayList<Product>()
+        productList.add(Product(resourceTool.getString(R.string.test_product_id),
+                resourceTool.getString(R.string.test_product_name),
+                resourceTool.getString(R.string.test_product_content),
+                5566))
+        productList.add(Product(resourceTool.getString(R.string.test_product_id),
+                resourceTool.getString(R.string.test_product_name),
+                resourceTool.getString(R.string.test_product_content),
+                5566))
+        productList.add(Product(resourceTool.getString(R.string.test_product_id),
+                resourceTool.getString(R.string.test_product_name),
+                resourceTool.getString(R.string.test_product_content),
+                5566))
+        productList.add(Product(resourceTool.getString(R.string.test_product_id),
+                resourceTool.getString(R.string.test_product_name),
+                resourceTool.getString(R.string.test_product_content),
+                5566))
+        productList.add(Product(resourceTool.getString(R.string.test_product_id),
+                resourceTool.getString(R.string.test_product_name),
+                resourceTool.getString(R.string.test_product_content),
+                5566))
+        productList.add(Product(resourceTool.getString(R.string.test_product_id),
+                resourceTool.getString(R.string.test_product_name),
+                resourceTool.getString(R.string.test_product_content),
+                5566))
+
+        return productList
     }
 }

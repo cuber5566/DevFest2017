@@ -6,5 +6,6 @@
     <string name="test_product_name">DevFest2017</string>
     <string name="test_product_content">DevFest2017 Cuber OOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXX</string>
     <string name="test_product_price">$5566</string>
+    <string name="error_get_product_list">get product list fail</string>
 
 </resources>

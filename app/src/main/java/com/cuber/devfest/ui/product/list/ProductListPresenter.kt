@@ -15,7 +15,8 @@ class ProductListPresenter(
 ) : ProductListContract.Presenter, LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    override fun onSubscribe() {
+    override fun onSubscribe(categoryId: String) {
+        getProductList(categoryId)
         TODO("do something when lifecycle owner ON_START")
     }
 
