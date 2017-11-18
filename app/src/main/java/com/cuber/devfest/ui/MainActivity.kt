@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.cuber.devfest.R
+import com.cuber.devfest.ui.product.detail.ProductDetailFragment
+import com.cuber.devfest.ui.product.list.ProductListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(R.id.container, FirstFragment())
+                    .add(R.id.container, ProductListFragment())
                     .commit()
         }
 
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
 
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SecondFragment())
+                    .replace(R.id.container, ProductDetailFragment())
                     .addToBackStack(null)
                     .commit()
         }
