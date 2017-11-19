@@ -66,29 +66,29 @@ class ProductRepository(
 
     private fun getFakeProductList(): List<Product> {
         val productList = ArrayList<Product>()
-        productList.add(Product(resourceTool.getString(R.string.test_product_id),
-                resourceTool.getString(R.string.test_product_name),
-                resourceTool.getString(R.string.test_product_content),
+        productList.add(Product(resourceSource.getString(R.string.test_product_id),
+                resourceSource.getString(R.string.test_product_name),
+                resourceSource.getString(R.string.test_product_content),
                 5566))
-        productList.add(Product(resourceTool.getString(R.string.test_product_id),
-                resourceTool.getString(R.string.test_product_name),
-                resourceTool.getString(R.string.test_product_content),
+        productList.add(Product(resourceSource.getString(R.string.test_product_id),
+                resourceSource.getString(R.string.test_product_name),
+                resourceSource.getString(R.string.test_product_content),
                 5566))
-        productList.add(Product(resourceTool.getString(R.string.test_product_id),
-                resourceTool.getString(R.string.test_product_name),
-                resourceTool.getString(R.string.test_product_content),
+        productList.add(Product(resourceSource.getString(R.string.test_product_id),
+                resourceSource.getString(R.string.test_product_name),
+                resourceSource.getString(R.string.test_product_content),
                 5566))
-        productList.add(Product(resourceTool.getString(R.string.test_product_id),
-                resourceTool.getString(R.string.test_product_name),
-                resourceTool.getString(R.string.test_product_content),
+        productList.add(Product(resourceSource.getString(R.string.test_product_id),
+                resourceSource.getString(R.string.test_product_name),
+                resourceSource.getString(R.string.test_product_content),
                 5566))
-        productList.add(Product(resourceTool.getString(R.string.test_product_id),
-                resourceTool.getString(R.string.test_product_name),
-                resourceTool.getString(R.string.test_product_content),
+        productList.add(Product(resourceSource.getString(R.string.test_product_id),
+                resourceSource.getString(R.string.test_product_name),
+                resourceSource.getString(R.string.test_product_content),
                 5566))
-        productList.add(Product(resourceTool.getString(R.string.test_product_id),
-                resourceTool.getString(R.string.test_product_name),
-                resourceTool.getString(R.string.test_product_content),
+        productList.add(Product(resourceSource.getString(R.string.test_product_id),
+                resourceSource.getString(R.string.test_product_name),
+                resourceSource.getString(R.string.test_product_content),
                 5566))
 
         return productList

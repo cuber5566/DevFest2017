@@ -13,15 +13,15 @@ class ApiSource private constructor() {
 
         val client = OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .connectTimeout(NetworkConfig.TIME_OUT_CONNECT.toLong(), TimeUnit.SECONDS)
-                .readTimeout(NetworkConfig.TIME_OUT_READ.toLong(), TimeUnit.SECONDS)
-                .writeTimeout(NetworkConfig.TIME_OUT_WRITE.toLong(), TimeUnit.SECONDS)
+                .connectTimeout(ApiConfig.TIME_OUT_CONNECT.toLong(), TimeUnit.SECONDS)
+                .readTimeout(ApiConfig.TIME_OUT_READ.toLong(), TimeUnit.SECONDS)
+                .writeTimeout(ApiConfig.TIME_OUT_WRITE.toLong(), TimeUnit.SECONDS)
                 .build()
 
         val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(NetworkConfig.BASE_URL)
+                .baseUrl(ApiConfig.BASE_URL)
                 .client(client)
                 .build()
     }

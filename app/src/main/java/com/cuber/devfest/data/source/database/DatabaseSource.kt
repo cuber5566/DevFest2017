@@ -14,7 +14,7 @@ class DatabaseSource {
     companion object {
 
         private var INSTANCE: DatabaseSource? = null
-        private var DATABASE_NAME = "DevFest2017"
+        private var DATABASE_NAME = "DevFest2017.db"
 
         @JvmStatic
         fun getInstance(): DatabaseSource {

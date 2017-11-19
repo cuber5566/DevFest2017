@@ -42,8 +42,6 @@ class ProductListFragment : Fragment(), ProductListContract.View {
             postAdapter = PostListAdapter(context)
             adapter = postAdapter
         }
-//        call from presenter onSubscribe
-        presenter.getProductList(categoryId)
     }
 
     override fun onGetProductList(productList: List<Product>) {
