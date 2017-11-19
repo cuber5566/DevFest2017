@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
-class PreferencesSource private constructor() {
+class PreferencesSource {
 
     fun init(application: Application) {
         INSTANCE = PreferencesSource()

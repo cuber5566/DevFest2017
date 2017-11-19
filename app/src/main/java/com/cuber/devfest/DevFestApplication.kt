@@ -5,9 +5,6 @@ import com.cuber.devfest.data.source.database.DatabaseSource
 import com.cuber.devfest.data.source.preference.PreferencesSource
 import com.cuber.devfest.data.source.resource.ResourceSource
 
-/**
- * Created by cuber on 2017/11/18.
- */
 class DevFestApplication : Application() {
 
     override fun onCreate() {
