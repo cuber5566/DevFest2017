@@ -1,10 +1,10 @@
-package com.cuber.devfest.util
+package com.cuber.devfest.data.source.resource
 
 import android.app.Application
 import android.content.res.Resources
 import android.support.annotation.StringRes
 
-class ResourceTool {
+class ResourceSource {
 
     fun init(application: Application) {
         resource = application.resources
@@ -17,12 +17,12 @@ class ResourceTool {
 
     companion object {
 
-        private var INSTANCE: ResourceTool? = null
+        private var INSTANCE: ResourceSource? = null
         private var resource: Resources? = null
 
         @JvmStatic
-        fun getInstance(): ResourceTool {
-            return INSTANCE ?: ResourceTool()
+        fun getInstance(): ResourceSource {
+            return INSTANCE ?: ResourceSource()
                     .apply { INSTANCE = this }
         }
 

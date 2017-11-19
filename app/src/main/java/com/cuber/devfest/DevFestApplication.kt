@@ -1,8 +1,9 @@
 package com.cuber.devfest
 
 import android.app.Application
-import com.cuber.devfest.util.PreferencesTool
-import com.cuber.devfest.util.ResourceTool
+import com.cuber.devfest.data.source.database.DatabaseSource
+import com.cuber.devfest.data.source.preference.PreferencesSource
+import com.cuber.devfest.data.source.resource.ResourceSource
 
 /**
  * Created by cuber on 2017/11/18.
@@ -11,7 +12,8 @@ class DevFestApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        ResourceTool.getInstance().init(this)
-        PreferencesTool.getInstance().init(this)
+        DatabaseSource.getInstance().init(this)
+        ResourceSource.getInstance().init(this)
+        PreferencesSource.getInstance().init(this)
     }
 }

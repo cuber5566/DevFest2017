@@ -1,4 +1,4 @@
-package com.cuber.devfest.util
+package com.cuber.devfest.data.source.preference
 
 import android.app.Application
 import android.content.Context
@@ -6,10 +6,10 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
-class PreferencesTool private constructor() {
+class PreferencesSource private constructor() {
 
     fun init(application: Application) {
-        INSTANCE = PreferencesTool()
+        INSTANCE = PreferencesSource()
         preferences = application.getSharedPreferences(NAME, Context.MODE_PRIVATE)
     }
 
@@ -47,12 +47,12 @@ class PreferencesTool private constructor() {
     companion object {
 
         private val NAME = "DevFest2017"
-        private var INSTANCE: PreferencesTool? = null
+        private var INSTANCE: PreferencesSource? = null
         private var preferences: SharedPreferences? = null
 
         @JvmStatic
-        fun getInstance(): PreferencesTool {
-            return INSTANCE ?: PreferencesTool()
+        fun getInstance(): PreferencesSource {
+            return INSTANCE ?: PreferencesSource()
                     .apply { INSTANCE = this }
         }
 

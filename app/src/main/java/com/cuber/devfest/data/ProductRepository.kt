@@ -2,25 +2,24 @@ package com.cuber.devfest.data
 
 import com.cuber.devfest.R
 import com.cuber.devfest.data.model.Product
-import com.cuber.devfest.data.source.CartSource
-import com.cuber.devfest.data.source.ProductSource
-import com.cuber.devfest.util.PreferencesKey
-import com.cuber.devfest.util.PreferencesTool
-import com.cuber.devfest.util.ResourceTool
-import com.google.gson.reflect.TypeToken
+import com.cuber.devfest.data.source.api.ApiSource
+import com.cuber.devfest.data.source.database.DatabaseSource
+import com.cuber.devfest.data.source.preference.PreferencesSource
+import com.cuber.devfest.data.source.resource.ResourceSource
 import io.reactivex.Single
 
 class ProductRepository(
-        private var preferencesTool: PreferencesTool = PreferencesTool.getInstance(),
-        private var resourceTool: ResourceTool = ResourceTool.getInstance()
-) : ProductSource, CartSource {
+        private var preferencesSource: PreferencesSource = PreferencesSource.getInstance(),
+        private var resourceSource: ResourceSource = ResourceSource.getInstance(),
+        private var apiSource: ApiSource = ApiSource.getInstance(),
+        private var databaseSource: DatabaseSource = DatabaseSource.getInstance()
+) : ProductRepo {
 
     override fun getProductById(productId: String): Single<Product> {
-        return Single.just(Product(resourceTool.getString(R.string.test_product_id),
-                resourceTool.getString(R.string.test_product_name),
-                resourceTool.getString(R.string.test_product_content),
+        return Single.just(Product(resourceSource.getString(R.string.test_product_id),
+                resourceSource.getString(R.string.test_product_name),
+                resourceSource.getString(R.string.test_product_content),
                 5566))
-
     }
 
     override fun getProductListBySeller(sellerId: String): Single<List<Product>> {
@@ -32,16 +31,19 @@ class ProductRepository(
     }
 
     override fun getCartPostList(): List<Product> {
-        return preferencesTool[PreferencesKey.CART_PRODUCT_LIST, object : TypeToken<List<Product>>() {
-        }.type]
+        return databaseSource.db.productDao().loadAllUsers()
     }
 
-    override fun isAddedCart(productId: String): Boolean = getCartPostList().any { it.id == productId }
-
-    override fun addToCart(productId: String) {
+    override fun isAddedCart(productId: String): Boolean {
+        return databaseSource.db.productDao().loadProductById(productId) != null
     }
 
-    override fun removeFromCart(productId: String) {
+    override fun addToCart(product: Product) {
+        databaseSource.db.productDao().insertProduct(product)
+    }
+
+    override fun removeFromCart(product: Product) {
+        databaseSource.db.productDao().deleteProduct(product)
     }
 
     companion object {
