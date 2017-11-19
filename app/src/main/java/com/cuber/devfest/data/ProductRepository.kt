@@ -32,14 +32,14 @@ class ProductRepository(
     }
 
     override fun getCartPostList(): Single<List<Product>> =
-            databaseSource.db.productDao().loadAllProduct()
+            databaseSource.room.productDao().loadAllProduct()
 
     override fun addToCart(product: Product) = Completable.fromCallable {
-        databaseSource.db.productDao().insertProduct(product)
+        databaseSource.room.productDao().insertProduct(product)
     }
 
     override fun removeFromCart(product: Product) = Completable.fromCallable {
-        databaseSource.db.productDao().deleteProduct(product)
+        databaseSource.room.productDao().deleteProduct(product)
     }
 
     companion object {
