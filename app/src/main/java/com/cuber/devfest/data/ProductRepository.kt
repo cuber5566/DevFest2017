@@ -6,6 +6,8 @@ import com.cuber.devfest.data.source.api.ApiSource
 import com.cuber.devfest.data.source.database.DatabaseSource
 import com.cuber.devfest.data.source.preference.PreferencesSource
 import com.cuber.devfest.data.source.resource.ResourceSource
+import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 class ProductRepository(
@@ -30,21 +32,14 @@ class ProductRepository(
         TODO("Call API")
     }
 
-    override fun getCartPostList(): List<Product> {
-        return databaseSource.db.productDao().loadAllUsers()
-    }
+    override fun getCartPostList(): Single<List<Product>> =
+            databaseSource.db.productDao().loadAllProduct()
 
-    override fun isAddedCart(productId: String): Boolean {
-        return databaseSource.db.productDao().loadProductById(productId) != null
-    }
+    override fun addToCart(product: Product): Completable =
+            databaseSource.db.productDao().insertProduct(product)
 
-    override fun addToCart(product: Product) {
-        databaseSource.db.productDao().insertProduct(product)
-    }
-
-    override fun removeFromCart(product: Product) {
-        databaseSource.db.productDao().deleteProduct(product)
-    }
+    override fun removeFromCart(product: Product): Completable =
+            databaseSource.db.productDao().deleteProduct(product)
 
     companion object {
 
