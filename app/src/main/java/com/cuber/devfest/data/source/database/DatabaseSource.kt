@@ -1,7 +1,11 @@
 package com.cuber.devfest.data.source.database
 
 import android.app.Application
+import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
+import android.arch.persistence.room.RoomDatabase
+import com.cuber.devfest.data.model.Product
+import com.cuber.devfest.data.source.database.dao.ProductDao
 
 class DatabaseSource {
 
@@ -27,4 +31,10 @@ class DatabaseSource {
             INSTANCE = null
         }
     }
+}
+
+@Database(entities = arrayOf(Product::class), version = 1)
+abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun productDao(): ProductDao
 }
