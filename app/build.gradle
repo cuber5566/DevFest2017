@@ -6,21 +6,41 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.cuber.devfest"
+        applicationId "com.cuber.com.cuber.devfest"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            useProguard false
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
 
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            dimension "default"
+            versionNameSuffix '-dev'
+            applicationIdSuffix '.dev'
+        }
+
+        prod {
+            dimension "default"
+        }
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

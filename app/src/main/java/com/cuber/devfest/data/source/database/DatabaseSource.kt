@@ -9,10 +9,10 @@ import com.cuber.devfest.data.source.database.dao.ProductDao
 
 class DatabaseSource {
 
-    lateinit var db: AppDatabase
+    lateinit var room: AppDatabase
 
     fun init(application: Application) {
-        db = Room.databaseBuilder(application, AppDatabase::class.java, DATABASE_NAME).build()
+        room = Room.databaseBuilder(application, AppDatabase::class.java, DATABASE_NAME).build()
     }
 
     companion object {

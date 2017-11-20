@@ -1,6 +1,5 @@
 package com.cuber.devfest.data.source.api.service
 
-import com.cuber.devfest.data.source.api.ApiConfig
 import com.cuber.devfest.data.source.api.response.ProductResponse
 import io.reactivex.Single
 import retrofit2.http.GET

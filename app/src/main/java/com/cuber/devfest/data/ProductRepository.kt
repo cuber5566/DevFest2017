@@ -6,6 +6,7 @@ import com.cuber.devfest.data.source.api.ApiSource
 import com.cuber.devfest.data.source.database.DatabaseSource
 import com.cuber.devfest.data.source.preference.PreferencesSource
 import com.cuber.devfest.data.source.resource.ResourceSource
+import io.reactivex.Completable
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
@@ -31,20 +32,15 @@ class ProductRepository(
         return Single.just(getFakeProductList()).delay(API_DELAY, TimeUnit.MILLISECONDS)
     }
 
-    override fun getCartPostList(): List<Product> {
-        return databaseSource.db.productDao().loadAllUsers()
+    override fun getCartPostList(): Single<List<Product>> =
+            databaseSource.room.productDao().loadAllProduct()
+
+    override fun addToCart(product: Product) = Completable.fromCallable {
+        databaseSource.room.productDao().insertProduct(product)
     }
 
-    override fun isAddedCart(productId: String): Boolean {
-        return databaseSource.db.productDao().loadProductById(productId) != null
-    }
-
-    override fun addToCart(product: Product) {
-        databaseSource.db.productDao().insertProduct(product)
-    }
-
-    override fun removeFromCart(product: Product) {
-        databaseSource.db.productDao().deleteProduct(product)
+    override fun removeFromCart(product: Product) = Completable.fromCallable {
+        databaseSource.room.productDao().deleteProduct(product)
     }
 
     companion object {

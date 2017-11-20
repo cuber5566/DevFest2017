@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.cuber.devfest", appContext.packageName)
+        assertEquals("com.cuber.com.cuber.devfest", appContext.packageName)
     }
 }

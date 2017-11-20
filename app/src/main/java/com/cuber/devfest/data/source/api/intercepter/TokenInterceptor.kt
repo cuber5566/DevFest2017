@@ -15,12 +15,15 @@ class TokenInterceptor(
         val originalRequest = chain.request()
 
         return chain.proceed(originalRequest.newBuilder()
-                .header(AUTHORIZATION, TOKEN_PREFIX + preferencesSource[PreferencesKey.TOKEN, String::class.java])
+                .header(AUTHORIZATION, TOKEN_PREFIX + getToken())
                 .build())
+
     }
+
+    private fun getToken():String = preferencesSource[PreferencesKey.TOKEN, String::class.java]
 
     companion object {
         private val AUTHORIZATION = "Authorization"
-        private val TOKEN_PREFIX = ""
+        private val TOKEN_PREFIX = "DevFest "
     }
 }
