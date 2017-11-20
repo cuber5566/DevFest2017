@@ -1,7 +1,6 @@
 package com.cuber.devfest.ui.product.list
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +8,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.cuber.devfest.R
 import com.cuber.devfest.data.model.Product
+import com.cuber.devfest.extension.setupPresenter
+import com.cuber.devfest.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_product_list.*
 
-class ProductListFragment : Fragment(), ProductListContract.View {
+class ProductListFragment : BaseFragment(), ProductListContract.View {
 
     private lateinit var presenter: ProductListPresenter
-    private lateinit var categoryId: String
+    private var categoryId: String = ""
     private lateinit var postAdapter: PostListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // data init
         arguments?.run {
             categoryId = getString(ARG_CATEGORY_ID)
         }
@@ -27,7 +27,10 @@ class ProductListFragment : Fragment(), ProductListContract.View {
         savedInstanceState?.run {
 
         }
-        presenter = ProductListPresenter(this)
+
+        presenter = setupPresenter(ProductListPresenter(this)) {
+            categoryId = this@ProductListFragment.categoryId
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

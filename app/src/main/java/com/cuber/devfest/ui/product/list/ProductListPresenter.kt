@@ -4,6 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
 import com.cuber.devfest.data.ProductRepository
+import com.cuber.devfest.data.model.Product
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -14,24 +15,29 @@ class ProductListPresenter(
         private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : ProductListContract.Presenter, LifecycleObserver {
 
+    lateinit var categoryId: String
+
+    override fun setupParams(categoryId: String) {
+        this.categoryId = categoryId
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    override fun onSubscribe(categoryId: String) {
+    override fun onSubscribe() {
         getProductList(categoryId)
-        TODO("do something when lifecycle owner ON_START")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     override fun onUnSubscribe() {
         compositeDisposable.clear()
-        TODO("release something when lifecycle owner ON_STOP")
     }
 
     override fun getProductList(categoryId: String) {
-
         compositeDisposable.add(productRepository.getProductListByCategory(categoryId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(view::onGetProductListError)
-                .subscribe(view::onGetProductList))
+                .subscribe(
+                        { productList: List<Product> -> view.onGetProductList(productList) },
+                        { throwable: Throwable -> view.onGetProductListError(throwable) }
+                ))
     }
 }

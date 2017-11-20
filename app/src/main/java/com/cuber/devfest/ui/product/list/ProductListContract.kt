@@ -13,7 +13,9 @@ interface ProductListContract {
 
     interface Presenter{
 
-        fun onSubscribe(categoryId: String)
+        fun setupParams(categoryId: String)
+
+        fun onSubscribe()
 
         fun onUnSubscribe()
 
