@@ -31,8 +31,9 @@ class ProductRepository(
         fun getInstance(): ProductRepository {
             return INSTANCE ?: ProductRepository(
 
-                    remoteProductSource = RemoteProductSource.getInstance(),
-                    localProductSource = LocalProductSource.getInstance())
+                    RemoteProductSource.getInstance(),
+
+                    LocalProductSource.getInstance())
 
                     .apply { INSTANCE = this }
         }
