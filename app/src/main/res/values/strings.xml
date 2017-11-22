@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DevFest</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="test_product_id">01</string>
+    <string name="test_product_name">DevFest2017</string>
+    <string name="test_product_content">DevFest2017 Cuber OOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXXOOXX</string>
+    <string name="test_product_price">$5566</string>
+
+</resources>

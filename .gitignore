@@ -1,3 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Android template
 # Built application files
 *.apk
 *.ap_
@@ -34,38 +36,43 @@ captures/
 
 # Intellij
 *.iml
-.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/dictionaries
+.idea/libraries
+
+# Keystore files
+*.jks
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 
-# Windows thumbnail
-Thumbs.db
-
-# macOS files
-.DS_Store
-
-# Eclipse project files
-.classpath
-.project
+# Google Services (e.g. APIs or Firebase)
+google-services.json
 
 # Freeline
 freeline.py
 freeline/
 freeline_project_description.json
+### Kotlin template
+# Compiled class file
 
-# VS Code
-.settings/
-.vscode/
-.gitignore
-app/.gitignore
-app/build.gradle
-app/libs/
-app/proguard-rules.pro
-app/src/
-build.gradle
-gradle.properties
-gradle/
-gradlew
-gradlew.bat
-settings.gradle
+# Log file
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
