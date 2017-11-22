@@ -21,12 +21,12 @@ class ProductListPresenter(
         this.categoryId = categoryId
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     override fun onSubscribe() {
         getProductList(categoryId)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     override fun onUnSubscribe() {
         compositeDisposable.clear()
     }
