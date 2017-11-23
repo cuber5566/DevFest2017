@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -42,5 +43,11 @@ class ProductListFragment : Fragment() {
             postAdapter.productList = it
             postAdapter.notifyDataSetChanged()
         })
+
+        viewModel.error.observe(this, Observer {
+            Snackbar.make(view, it.toString(), Snackbar.LENGTH_LONG).show()
+        })
+
+        viewModel.updateProductList()
     }
 }

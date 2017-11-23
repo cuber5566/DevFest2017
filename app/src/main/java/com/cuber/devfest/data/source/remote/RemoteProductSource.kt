@@ -9,7 +9,6 @@ import com.cuber.devfest.data.source.remote.service.ProductService
 import com.cuber.devfest.data.source.remote.service.ServiceProvider
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Response
 
 class RemoteProductSource(
 

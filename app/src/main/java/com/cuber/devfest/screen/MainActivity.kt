@@ -1,6 +1,5 @@
 package com.cuber.devfest.screen
 
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -9,12 +8,9 @@ import android.view.MenuItem
 import com.cuber.devfest.R
 import com.cuber.devfest.screen.product.detail.ProductDetailFragment
 import com.cuber.devfest.screen.product.list.ProductListFragment
-import com.cuber.devfest.screen.product.list.ProductListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
