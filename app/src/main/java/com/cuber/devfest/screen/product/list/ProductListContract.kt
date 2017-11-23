@@ -1,4 +1,4 @@
-package com.cuber.devfest.ui.product.list
+package com.cuber.devfest.screen.product.list
 
 import com.cuber.devfest.data.model.Product
 
@@ -13,12 +13,10 @@ interface ProductListContract {
 
     interface Presenter{
 
-        fun setupParams(categoryId: String)
-
         fun onSubscribe()
 
         fun onUnSubscribe()
 
-        fun getProductList(categoryId: String)
+        fun getProductList()
     }
 }

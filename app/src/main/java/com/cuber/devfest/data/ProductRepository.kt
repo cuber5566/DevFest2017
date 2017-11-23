@@ -1,12 +1,10 @@
 package com.cuber.devfest.data
 
 import android.support.annotation.VisibleForTesting
-import com.cuber.devfest.R
 import com.cuber.devfest.data.model.Product
 import com.cuber.devfest.data.source.local.LocalProductSource
 import com.cuber.devfest.data.source.remote.RemoteProductSource
 import io.reactivex.Single
-import java.util.concurrent.TimeUnit
 
 class ProductRepository(
         private var remoteProductSource: ProductRepositoryImp,

@@ -9,7 +9,7 @@ import com.cuber.devfest.data.model.Product
 
 class DaoProvider private constructor(){
 
-    lateinit var room: AppDatabase
+    private lateinit var room: AppDatabase
     lateinit var productDao: ProductDao
 
     fun init(application: Application) {

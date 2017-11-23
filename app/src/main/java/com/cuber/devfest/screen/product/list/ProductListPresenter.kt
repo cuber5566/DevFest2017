@@ -1,4 +1,4 @@
-package com.cuber.devfest.ui.product.list
+package com.cuber.devfest.screen.product.list
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
@@ -15,15 +15,9 @@ class ProductListPresenter(
         private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : ProductListContract.Presenter, LifecycleObserver {
 
-    lateinit var categoryId: String
-
-    override fun setupParams(categoryId: String) {
-        this.categoryId = categoryId
-    }
-
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     override fun onSubscribe() {
-        getProductList(categoryId)
+        getProductList()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -31,8 +25,8 @@ class ProductListPresenter(
         compositeDisposable.clear()
     }
 
-    override fun getProductList(categoryId: String) {
-        compositeDisposable.add(productRepository.getProductListByCategory(categoryId)
+    override fun getProductList() {
+        compositeDisposable.add(productRepository.getProductList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
