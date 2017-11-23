@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_product.view.*
 
 class PostListAdapter(private val context: Context) : RecyclerView.Adapter<PostListAdapter.ProductHolder>() {
 
-    private var productList: List<Product>? = null
+    var productList: List<Product>? = null
 
     override fun getItemCount(): Int = productList?.size ?: 0
 
