@@ -8,10 +8,9 @@ open class BaseRemoteSource {
 
     fun <T : BaseResponse> isApiSuccess(response: T): T {
 
-        if (response.status == ApiErrorCode.SUCCESS) {
-            return response
-        } else {
-            throw ApiException(response)
+        when {
+            response.status == ApiErrorCode.SUCCESS -> return response
+            else -> throw ApiException(response)
         }
     }
 }

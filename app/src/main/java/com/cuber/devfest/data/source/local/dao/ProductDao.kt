@@ -11,7 +11,7 @@ import io.reactivex.Single
 interface ProductDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProductList(vararg products: List<Product>)
+    fun insertProductList(products: List<Product>)
 
     @Query("DELETE FROM products")
     fun deleteAllProduct()
