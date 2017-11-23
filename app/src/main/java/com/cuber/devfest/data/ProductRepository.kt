@@ -1,92 +1,50 @@
 package com.cuber.devfest.data
 
+import android.support.annotation.VisibleForTesting
 import com.cuber.devfest.R
 import com.cuber.devfest.data.model.Product
-import com.cuber.devfest.data.source.api.ApiSource
-import com.cuber.devfest.data.source.database.DatabaseSource
-import com.cuber.devfest.data.source.preference.PreferencesSource
-import com.cuber.devfest.data.source.resource.ResourceSource
-import io.reactivex.Completable
+import com.cuber.devfest.data.source.local.LocalProductSource
+import com.cuber.devfest.data.source.remote.RemoteProductSource
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 
 class ProductRepository(
-        private var preferencesSource: PreferencesSource = PreferencesSource.getInstance(),
-        private var resourceSource: ResourceSource = ResourceSource.getInstance(),
-        private var apiSource: ApiSource = ApiSource.getInstance(),
-        private var databaseSource: DatabaseSource = DatabaseSource.getInstance()
-) : ProductRepo {
+        private var remoteProductSource: ProductRepositoryImp,
+        private var localProductSource: ProductRepositoryImp
+
+) : ProductRepositoryImp {
 
     override fun getProductById(productId: String): Single<Product> {
-        return Single.just(Product(resourceSource.getString(R.string.test_product_id),
-                resourceSource.getString(R.string.test_product_name),
-                resourceSource.getString(R.string.test_product_content),
-                5566))
+        return remoteProductSource.getProductById(productId)
+                .onErrorReturn { localProductSource.getProductById(productId).blockingGet() ?: throw it }
     }
 
-    override fun getProductListBySeller(sellerId: String): Single<List<Product>> {
-        TODO("Call API")
-    }
-
-    override fun getProductListByCategory(categoryId: String): Single<List<Product>> {
-        return Single.just(getFakeProductList()).delay(API_DELAY, TimeUnit.MILLISECONDS)
-    }
-
-    override fun getCartPostList(): Single<List<Product>> =
-            databaseSource.room.productDao().loadAllProduct()
-
-    override fun addToCart(product: Product) = Completable.fromCallable {
-        databaseSource.room.productDao().insertProduct(product)
-    }
-
-    override fun removeFromCart(product: Product) = Completable.fromCallable {
-        databaseSource.room.productDao().deleteProduct(product)
+    override fun getProductList(): Single<List<Product>> {
+        return remoteProductSource.getProductList()
+                .onErrorReturn {
+                    val local = localProductSource.getProductList().blockingGet()
+                    if (local.isEmpty()) { throw it }
+                    else { local }
+                }
     }
 
     companion object {
 
         private var INSTANCE: ProductRepository? = null
-        private var API_DELAY = 3000L
 
         @JvmStatic
         fun getInstance(): ProductRepository {
-            return INSTANCE ?: ProductRepository()
+            return INSTANCE ?: ProductRepository(
+
+                    remoteProductSource = RemoteProductSource.getInstance(),
+                    localProductSource = LocalProductSource.getInstance())
+
                     .apply { INSTANCE = this }
         }
 
-        @JvmStatic
+        @VisibleForTesting
         fun destroyInstance() {
             INSTANCE = null
         }
-    }
-
-    private fun getFakeProductList(): List<Product> {
-        val productList = ArrayList<Product>()
-        productList.add(Product(resourceSource.getString(R.string.test_product_id),
-                resourceSource.getString(R.string.test_product_name),
-                resourceSource.getString(R.string.test_product_content),
-                5566))
-        productList.add(Product(resourceSource.getString(R.string.test_product_id),
-                resourceSource.getString(R.string.test_product_name),
-                resourceSource.getString(R.string.test_product_content),
-                5566))
-        productList.add(Product(resourceSource.getString(R.string.test_product_id),
-                resourceSource.getString(R.string.test_product_name),
-                resourceSource.getString(R.string.test_product_content),
-                5566))
-        productList.add(Product(resourceSource.getString(R.string.test_product_id),
-                resourceSource.getString(R.string.test_product_name),
-                resourceSource.getString(R.string.test_product_content),
-                5566))
-        productList.add(Product(resourceSource.getString(R.string.test_product_id),
-                resourceSource.getString(R.string.test_product_name),
-                resourceSource.getString(R.string.test_product_content),
-                5566))
-        productList.add(Product(resourceSource.getString(R.string.test_product_id),
-                resourceSource.getString(R.string.test_product_name),
-                resourceSource.getString(R.string.test_product_content),
-                5566))
-
-        return productList
     }
 }

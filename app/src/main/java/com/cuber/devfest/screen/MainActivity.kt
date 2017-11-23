@@ -1,4 +1,4 @@
-package com.cuber.devfest.ui
+package com.cuber.devfest.screen
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.cuber.devfest.R
-import com.cuber.devfest.ui.product.detail.ProductDetailFragment
-import com.cuber.devfest.ui.product.list.ProductListFragment
+import com.cuber.devfest.screen.product.detail.ProductDetailFragment
+import com.cuber.devfest.screen.product.list.ProductListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

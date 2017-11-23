@@ -1,4 +1,4 @@
-package com.cuber.devfest.data.source.api
+package com.cuber.devfest.data.source.remote
 
 
 object ApiConfig {

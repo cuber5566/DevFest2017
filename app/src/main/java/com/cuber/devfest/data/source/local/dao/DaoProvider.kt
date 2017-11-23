@@ -1,32 +1,34 @@
-package com.cuber.devfest.data.source.database
+package com.cuber.devfest.data.source.local.dao
 
 import android.app.Application
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
+import android.support.annotation.VisibleForTesting
 import com.cuber.devfest.data.model.Product
-import com.cuber.devfest.data.source.database.dao.ProductDao
 
-class DatabaseSource {
+class DaoProvider private constructor(){
 
     lateinit var room: AppDatabase
+    lateinit var productDao: ProductDao
 
     fun init(application: Application) {
         room = Room.databaseBuilder(application, AppDatabase::class.java, DATABASE_NAME).build()
+        productDao = room.productDao()
     }
 
     companion object {
 
-        private var INSTANCE: DatabaseSource? = null
-        private var DATABASE_NAME = "DevFest2017.db"
+        private var INSTANCE: DaoProvider? = null
+        private var DATABASE_NAME = "DevFest2017"
 
         @JvmStatic
-        fun getInstance(): DatabaseSource {
-            return INSTANCE ?: DatabaseSource()
+        fun getInstance(): DaoProvider {
+            return INSTANCE ?: DaoProvider()
                     .apply { INSTANCE = this }
         }
 
-        @JvmStatic
+        @VisibleForTesting
         fun destroyInstance() {
             INSTANCE = null
         }

@@ -1,4 +1,4 @@
-package com.cuber.devfest.ui.product.list
+package com.cuber.devfest.screen.product.list
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
