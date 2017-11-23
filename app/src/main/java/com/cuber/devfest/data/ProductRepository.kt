@@ -15,12 +15,16 @@ class ProductRepository(
 
     override fun getProductById(productId: String): Single<Product> {
         return remoteProductSource.getProductById(productId)
-                .onErrorReturn { localProductSource.getProductById(productId).blockingGet() }
+                .onErrorReturn { localProductSource.getProductById(productId).blockingGet() ?: throw it }
     }
 
     override fun getProductList(): Single<List<Product>> {
         return remoteProductSource.getProductList()
-                .onErrorReturn { localProductSource.getProductList().blockingGet() }
+                .onErrorReturn {
+                    val local = localProductSource.getProductList().blockingGet()
+                    if (local.isEmpty()) { throw it }
+                    else { local }
+                }
     }
 
     companion object {
