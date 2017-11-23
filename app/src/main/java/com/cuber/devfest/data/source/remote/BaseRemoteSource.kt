@@ -1,10 +1,10 @@
-package com.cuber.devfest.data
+package com.cuber.devfest.data.source.remote
 
 import com.cuber.devfest.data.source.remote.exception.ApiErrorCode
 import com.cuber.devfest.data.source.remote.exception.ApiException
 import com.cuber.devfest.data.source.remote.response.BaseResponse
 
-open class BaseRepository {
+open class BaseRemoteSource {
 
     fun <T : BaseResponse> isApiSuccess(response: T): T {
 

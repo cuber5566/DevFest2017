@@ -1,7 +1,6 @@
 package com.cuber.devfest.data.source.remote
 
 import android.support.annotation.VisibleForTesting
-import com.cuber.devfest.data.BaseRepository
 import com.cuber.devfest.data.ProductRepositoryImp
 import com.cuber.devfest.data.model.Product
 import com.cuber.devfest.data.source.local.dao.DaoProvider
@@ -16,7 +15,7 @@ class RemoteProductSource(
         private var productDao: ProductDao,
         private var productService: ProductService
 
-) : BaseRepository(), ProductRepositoryImp {
+) : BaseRemoteSource(), ProductRepositoryImp {
 
     override fun getProductById(productId: String): Single<Product> {
         return productService.getProductById(productId)
