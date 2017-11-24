@@ -7,7 +7,7 @@ import android.support.annotation.VisibleForTesting
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
-class PreferencesProvider private constructor() {
+class PreferencesProvider private constructor() : AppPreference {
 
     private lateinit var preferences: SharedPreferences
 
@@ -17,7 +17,7 @@ class PreferencesProvider private constructor() {
     }
 
     @Suppress("UNCHECKED_CAST", "IMPLICIT_CAST_TO_ANY")
-    operator fun <T : Any> get(key: PreferencesKey, clazz: Class<T>): T {
+    override fun <T : Any> get(key: PreferencesKey, clazz: Class<T>): T {
         return when (clazz) {
             String::class.java -> clazz.cast(preferences.getString(key.name, ""))
             Boolean::class.java -> clazz.cast(preferences.getBoolean(key.name, false))
@@ -28,7 +28,7 @@ class PreferencesProvider private constructor() {
         } as T
     }
 
-    operator fun <T> get(key: PreferencesKey, type: Type): T =
+    override fun <T> get(key: PreferencesKey, type: Type): T =
             Gson().fromJson(preferences.getString(key.name, ""), type)
 
     fun put(key: PreferencesKey, `object`: Any) {
@@ -43,7 +43,7 @@ class PreferencesProvider private constructor() {
         }
     }
 
-    fun clear() {
+    override fun clear() {
         preferences.edit().clear().apply()
     }
 
