@@ -8,10 +8,10 @@ import io.reactivex.Single
 
 class ProductRepository(
 
-        private var remoteProductSource: ProductRepositoryImp,
-        private var localProductSource: ProductRepositoryImp
+        private var remoteProductSource: ProductSource,
+        private var localProductSource: ProductSource
 
-) : ProductRepositoryImp {
+) : ProductSource {
 
     override fun getProductById(productId: String): Single<Product> {
         return remoteProductSource.getProductById(productId)
