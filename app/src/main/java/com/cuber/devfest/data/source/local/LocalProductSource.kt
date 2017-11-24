@@ -1,27 +1,30 @@
 package com.cuber.devfest.data.source.local
 
 import android.support.annotation.VisibleForTesting
-import com.cuber.devfest.data.ProductRepositoryImp
+import com.cuber.devfest.data.ProductSource
 import com.cuber.devfest.data.model.Product
 import com.cuber.devfest.data.source.local.dao.DaoProvider
 import com.cuber.devfest.data.source.local.dao.ProductDao
+import com.cuber.devfest.util.scheduler.SchedulerProvider
+import com.cuber.devfest.util.scheduler.AppScheduler
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 
 class LocalProductSource(
 
-        private var productDao: ProductDao
+        private var productDao: ProductDao,
+        private var appScheduler: AppScheduler
 
-) : ProductRepositoryImp {
+
+) : ProductSource {
 
     override fun getProductById(productId: String): Single<Product> {
         return productDao.loadProductById(productId)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(appScheduler.io())
     }
 
     override fun getProductList(): Single<List<Product>> {
         return productDao.loadProductList()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(appScheduler.io())
     }
 
     companion object {
@@ -32,7 +35,8 @@ class LocalProductSource(
         fun getInstance(): LocalProductSource =
                 INSTANCE ?: LocalProductSource(
 
-                        DaoProvider.getInstance().productDao
+                        DaoProvider.getInstance().productDao,
+                        SchedulerProvider.getInstance()
 
                 ).apply { INSTANCE = this }
 

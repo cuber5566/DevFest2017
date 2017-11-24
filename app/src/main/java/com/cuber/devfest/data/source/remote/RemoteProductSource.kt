@@ -1,25 +1,27 @@
 package com.cuber.devfest.data.source.remote
 
 import android.support.annotation.VisibleForTesting
-import com.cuber.devfest.data.ProductRepositoryImp
+import com.cuber.devfest.data.ProductSource
 import com.cuber.devfest.data.model.Product
 import com.cuber.devfest.data.source.local.dao.DaoProvider
 import com.cuber.devfest.data.source.local.dao.ProductDao
 import com.cuber.devfest.data.source.remote.service.ProductService
 import com.cuber.devfest.data.source.remote.service.ServiceProvider
+import com.cuber.devfest.util.scheduler.SchedulerProvider
+import com.cuber.devfest.util.scheduler.AppScheduler
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 
 class RemoteProductSource(
 
         private var productDao: ProductDao,
-        private var productService: ProductService
+        private var productService: ProductService,
+        private var appScheduler: AppScheduler
 
-) : BaseRemoteSource(), ProductRepositoryImp {
+) : BaseRemoteSource(), ProductSource {
 
     override fun getProductById(productId: String): Single<Product> {
         return productService.getProductById(productId)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(appScheduler.io())
                 .map { isApiSuccess(it) }
                 .map { it.product }
     }
@@ -37,7 +39,7 @@ class RemoteProductSource(
 //        return Single.just(products)
 
         return productService.getProductList()
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(appScheduler.io())
                 .map { isApiSuccess(it) }
                 .map { it.productList }
                 .map { saveProductList(it) }
@@ -57,7 +59,8 @@ class RemoteProductSource(
                 INSTANCE ?: RemoteProductSource(
 
                         DaoProvider.getInstance().productDao,
-                        ServiceProvider.getInstance().productService
+                        ServiceProvider.getInstance().productService,
+                        SchedulerProvider.getInstance()
 
                 ).apply { INSTANCE = this }
 
