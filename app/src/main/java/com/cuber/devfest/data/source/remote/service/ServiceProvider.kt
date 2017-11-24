@@ -1,7 +1,7 @@
 package com.cuber.devfest.data.source.remote.service
 
 import android.support.annotation.VisibleForTesting
-import com.cuber.devfest.data.source.remote.ApiConfig
+import com.cuber.devfest.data.source.api.ApiConfig
 import com.cuber.devfest.data.source.remote.intercepter.TokenInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
