@@ -7,14 +7,11 @@ import android.support.annotation.VisibleForTesting
 import com.google.gson.Gson
 import java.lang.reflect.Type
 
-class PreferencesProvider private constructor() : AppPreference {
+class PreferencesProvider(
 
-    private lateinit var preferences: SharedPreferences
+        private var preferences: SharedPreferences
 
-    fun init(application: Application) {
-        INSTANCE = getInstance()
-        getInstance().preferences = application.getSharedPreferences(NAME, Context.MODE_PRIVATE)
-    }
+) : AppPreference {
 
     @Suppress("UNCHECKED_CAST", "IMPLICIT_CAST_TO_ANY")
     override fun <T : Any> get(key: PreferencesKey, clazz: Class<T>): T {
@@ -31,7 +28,7 @@ class PreferencesProvider private constructor() : AppPreference {
     override fun <T> get(key: PreferencesKey, type: Type): T =
             Gson().fromJson(preferences.getString(key.name, ""), type)
 
-    fun put(key: PreferencesKey, `object`: Any) {
+    override fun put(key: PreferencesKey, `object`: Any) {
         when {
             `object`.javaClass == String::class.java -> preferences.edit().putString(key.name,
                     `object` as String).apply()
@@ -51,11 +48,20 @@ class PreferencesProvider private constructor() : AppPreference {
 
         private val NAME = "DevFest2017"
         private var INSTANCE: PreferencesProvider? = null
+        private var PREFERENCES: SharedPreferences? = null
+
+        @JvmStatic
+        fun init(application: Application) {
+            PREFERENCES = application.getSharedPreferences(NAME, Context.MODE_PRIVATE)
+        }
 
         @JvmStatic
         fun getInstance(): PreferencesProvider {
-            return INSTANCE ?: PreferencesProvider()
-                    .apply { INSTANCE = this }
+            return INSTANCE ?: PreferencesProvider(
+
+                    preferences = PREFERENCES!!
+
+            ).apply { INSTANCE = this }
         }
 
         @VisibleForTesting

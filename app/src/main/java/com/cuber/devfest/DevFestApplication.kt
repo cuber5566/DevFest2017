@@ -9,8 +9,8 @@ class DevFestApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        DaoProvider.getInstance().init(this)
-        ResourceProvider.getInstance().init(this)
-        PreferencesProvider.getInstance().init(this)
+        DaoProvider.init(this)
+        ResourceProvider.init(this)
+        PreferencesProvider.init(this)
     }
 }

@@ -4,24 +4,31 @@ import android.app.Application
 import android.content.res.Resources
 import android.support.annotation.VisibleForTesting
 
-class ResourceProvider private constructor() : AppResource {
+class ResourceProvider(
 
-    private lateinit var resource: Resources
+        private var resources: Resources
 
-    fun init(application: Application) {
-        resource = application.resources
-    }
+) : AppResource {
 
-    override fun resource(): Resources = resource
+    override fun resource(): Resources = resources
 
     companion object {
 
         private var INSTANCE: ResourceProvider? = null
+        private var RESOURCE: Resources? = null
+
+        @JvmStatic
+        fun init(application: Application) {
+            RESOURCE = application.resources
+        }
 
         @JvmStatic
         fun getInstance(): ResourceProvider {
-            return INSTANCE ?: ResourceProvider()
-                    .apply { INSTANCE = this }
+            return INSTANCE ?: ResourceProvider(
+
+                    resources = RESOURCE!!
+
+            ).apply { INSTANCE = this }
         }
 
         @VisibleForTesting
