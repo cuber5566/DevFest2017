@@ -5,15 +5,14 @@ import com.cuber.devfest.data.ProductSource
 import com.cuber.devfest.data.model.Product
 import com.cuber.devfest.data.source.local.dao.DaoProvider
 import com.cuber.devfest.data.source.local.dao.ProductDao
-import com.cuber.devfest.util.scheduler.SchedulerProvider
 import com.cuber.devfest.util.scheduler.AppScheduler
+import com.cuber.devfest.util.scheduler.SchedulerProvider
 import io.reactivex.Single
 
 class LocalProductSource(
 
         private var productDao: ProductDao,
         private var appScheduler: AppScheduler
-
 
 ) : ProductSource {
 
