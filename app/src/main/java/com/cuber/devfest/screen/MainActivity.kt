@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.cuber.devfest.R
+import com.cuber.devfest.data.source.local.preference.PreferencesKey
+import com.cuber.devfest.data.source.local.preference.PreferencesProvider
 import com.cuber.devfest.screen.product.detail.ProductDetailFragment
 import com.cuber.devfest.screen.product.list.ProductListFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
                     .addToBackStack(null)
                     .commit()
         }
+
+        PreferencesProvider.getInstance().put(PreferencesKey.TOKEN_AUTH, "111")
 
     }
 

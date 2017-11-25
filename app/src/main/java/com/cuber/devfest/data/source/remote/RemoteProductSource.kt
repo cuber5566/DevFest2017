@@ -27,22 +27,22 @@ class RemoteProductSource(
     }
 
     override fun getProductList(): Single<List<Product>> {
+//
+//        var products = ArrayList<Product>()
+//        products.add(Product("01", "DevFest01" ,"Android Architecture Component01", 1))
+//        products.add(Product("02", "DevFest02" ,"Android Architecture Component02", 2))
+//        products.add(Product("03", "DevFest03" ,"Android Architecture Component03", 3))
+//        products.add(Product("04", "DevFest04" ,"Android Architecture Component04", 4))
+//        products.add(Product("05", "DevFest05" ,"Android Architecture Component05", 5))
+//        products.add(Product("06", "DevFest06" ,"Android Architecture Component06", 6))
+//
+//        return Single.just(products)
 
-        var products = ArrayList<Product>()
-        products.add(Product("01", "DevFest01" ,"Android Architecture Component01", 1))
-        products.add(Product("02", "DevFest02" ,"Android Architecture Component02", 2))
-        products.add(Product("03", "DevFest03" ,"Android Architecture Component03", 3))
-        products.add(Product("04", "DevFest04" ,"Android Architecture Component04", 4))
-        products.add(Product("05", "DevFest05" ,"Android Architecture Component05", 5))
-        products.add(Product("06", "DevFest06" ,"Android Architecture Component06", 6))
-
-        return Single.just(products)
-
-//        return productService.getProductList()
-//                .subscribeOn(appScheduler.io())
-//                .map { isApiSuccess(it) }
-//                .map { it.productList }
-//                .map { saveProductList(it) }
+        return productService.getProductList()
+                .subscribeOn(appScheduler.io())
+                .map { isApiSuccess(it) }
+                .map { it.productList }
+                .map { saveProductList(it) }
     }
 
     private fun saveProductList(productList: List<Product>): List<Product> {

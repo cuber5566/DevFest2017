@@ -20,7 +20,6 @@ class TokenInterceptor(
         return chain.proceed(originalRequest.newBuilder()
                 .header(AUTHORIZATION, TOKEN_PREFIX + getToken())
                 .build())
-
     }
 
     private fun getToken(): String = appPreference.get(PreferencesKey.TOKEN_AUTH, String::class.java)

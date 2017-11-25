@@ -15,7 +15,9 @@ class ProductRepository(
 
     override fun getProductById(productId: String): Single<Product> {
         return remoteProductSource.getProductById(productId)
-                .onErrorReturn { localProductSource.getProductById(productId).blockingGet() ?: throw it }
+                .onErrorReturn {
+                    localProductSource.getProductById(productId).blockingGet() ?: throw it
+                }
     }
 
     override fun getProductList(): Single<List<Product>> {

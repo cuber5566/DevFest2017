@@ -8,5 +8,7 @@ interface AppPreference {
 
     fun <T> get(key: PreferencesKey, type: Type): T
 
+    fun put(key: PreferencesKey, `object`: Any)
+
     fun clear()
 }
